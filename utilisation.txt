@@ -1,0 +1,314 @@
+
+# installation de git sur linux 
+sudo yum install git -y 
+
+git
+
+# configurer notre git 
+git config --global user.name "ainakikisagbe"
+git config --global user.email "aina.kiki.sagbe@gmail.com"
+
+# choisir un éditeur 
+git config --global core.editor vi
+
+# afficheri les parametres configuré :
+git config --list 
+
+# afficher le paramètre name configuré 
+git config user.name 
+
+# help pour config 
+git help config 
+
+
+# suivre l'ensemble des commits
+git log          # affiche toutes les modifications 
+git log -p -2    # pour afficher les 2 derniers modifications 
+git log --pretty=oneline
+git log --graph 
+
+
+# creer un tag pourlivrer une version d'api
+git tag v1.0
+git push tags 
+
+## tp 
+# initialiser le repository pour qu'il soit prêt à traqué
+git init 
+
+
+# dire à git de tracker tous les fichiers de ce répertoire et ses sous dossiers 
+git add .
+
+# voir les fichiers quis sont tracké
+git status
+
+# pour commiter les modifications
+git commit
+git status
+
+
+# quand on crée un nouveau fichier, il faut faire le add . pour que git puisse le tracker 
+git add .
+git commit -m "mon commentire ou message"
+# on envoie sur le repos distant publié en pushant
+git push
+
+# versionner : créer une version 1.0.0
+git tag -a 1.0.0 -m "version 1.0.0 envoyé actuellement" 
+git show 1.0.0
+
+
+# créer des alias 
+git config --global alias.st status # ainsi quand je vai lancer "git st", il va comprendre et exécuper "git status"
+git config --global alias.br branch # ainsi quand je vai lancer "git br", il va comprendre et exécuper "git branch"
+# on peu créeer autant d'alias comme on le souhaite lors d'une session git 
+
+
+
+
+## les branche 
+# la branche principale s'appelle branche "Master" 
+# quand on veux apporter des modification, on ne la crée pas sur la master, on va créer une nouvelle branches pour faire nos modification et c'est quand on aura fini toute non modifications sur la branche isolé qu'on fera après la fusion sur la branche master 
+
+# quand il y a plusieurs sous branches et qu'on veux tous fusionner avec le master alors que certains mêmes fichiers on été modifié dans différentes branches, alors il ya aura un merge conflit, et là il y aura le manager qui devra trancher et l'equite tech qui devra décider. 
+
+
+# origin : repository distant 
+# master 
+
+# recupérer les dernières modifications sur le git distant vers notre machine local 
+git fetch origin  # docn le faire de temps en temps 
+
+# ensuite si je veux merger l'origin/master avec ma master avec les modification distant récupé avec le fetch, je peux faire 
+git merge 
+ou 
+git tool # le git tool permet de faire le fetch et ensuite fait le merge 
+ 
+
+
+## tp
+
+# voir les branches 
+git branch 
+
+# créer une nouvelle branche nommé "update_default_value" et monter sur la nouvelle branche
+git checkout -b update_default_value
+#> créer mes fichiers et faire mes modifications
+git add .
+git commit -m "update default value in new branche"
+
+# switcher vers la branche "master"
+git checkout master 
+
+# Maintenant que je suis sur la branche master, je vais lui fusionner le branche "update_default_value"
+git merge update_default_value
+
+git log 
+
+# delete (supprimer) la branche "update_default_value"
+git branch -d update_default_value
+
+# afficher les branches 
+git branch 
+
+# créer une nouvelle branche nommé "password_linux" et monter sur la nouvelle branche
+git checkout -b password_linux
+
+#> créer mes fichiers et faire mes modifications
+
+git status 
+git add .
+git commit -m "update  in new branche"
+
+# switcher vers la branche "master"
+git checkout master 
+
+# afficher les branches 
+git branch 
+
+# Maintenant que je suis sur la branche master, je vais lui fusionner le branche "password_linux"
+git merge password_linux
+
+git add .
+git commit -m "fix merge request"
+
+# delete (supprimer) la branche "password_linux"
+git branch -d password_linux
+
+
+
+
+### git serveur gitlab
+## créer un serveur gitlab sur un serveur en entreprise au lieux d'utiliser le github.com 
+## on va linstaller dans docker en utilisant rpository d'installation déjà présent sur github 
+# aller sur ma machine linux 
+git clone https://github.com/sameersbn/docker-gitlab.git
+cd docker-gitlab/
+ls
+#> remplacé dans le fichier docker-compose.yml, le tag “sameersbn/gitlab:15.8.0” par “sameersbn/gitlab:latest” car l'image version “15.8.0” pourrais ne plus exister au lancement :
+docker-compose up -d 
+
+# se connecter sur l'ip et son port puis attendre un peu que gitlab finis de charger :
+ip_local:10080
+# git nous demande de créer un mot de passe pour le compte root 
+# on se connect : user = root, passwd = mypassword_root
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-4-correction-installation-de-gitlab-2/
+
+
+
+### travail colaboratif avec gitlab
+# https://eazytraining.fr/cours/introduction-a-git/lessons/travail-collaboratif/
+
+# PS: avant de poussuer sur le serveur et pour éviter les conflit, il faut impérativement faire un fetch avant de merge et pusher : 
+# se fait une seul fois 
+git clone 
+# à répéter avant chaque push car d'autre developpeur pourrai déjà apporté des modifications au code distant, donc il faut aller les récupérer 
+git fetch origin master 
+git pull origin mamster
+git merge 
+git push 
+
+## tp 
+
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-4/
+
+# creer des users : 1 manager et 2 dev 
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-5-correction/
+
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-5-correction-creation-des-utilisateurs-sur-gitlab/
+# créer un groupe de projet: cela permet de rassembler dant une même entité un ensemble de repository 
+# donner des droits aux membres
+
+
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-5-correction-assignation-des-utilisateurs-aux-utilisateurs/
+# création du projet gitlab 
+# se connecter avec le compte manager
+
+
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-5-correction-creation-du-projet-sur-gitlab/
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-5-correction-contribution-du-developpeur-2/
+# apporter des modifications au repos en tant qu'utilisateur 
+# ajouter un repos distant à mon local avec un remote # quand il est encore vide)
+git remote add origin http://git.......git
+git push origin master 
+
+# chaque utiisateur doit créer sa branche pour travailler et ne pas modifier la branche principale tant que ses modifications ne sont pas prêt 
+git checkout -b newbranch
+
+# pour lister l'ensemble des repos distants :
+git remote -v 
+# pousser sur ma nouvelle branche 
+git push origin newbranch
+
+# demander au manager de valider ma modification apporté sur ma branche et de merger à la branche principale 
+
+# quitter vi : ":wq"
+
+
+
+### github 
+## https://eazytraining.fr/cours/introduction-a-git/lessons/github/
+
+# comment contribuer à un projet existant sur github 
+- forker le projet source vers son repos git personnel
+- clonner son git personnel en local pour travailler avec- créer une nouvelle branches et faire les modifications ou ajout 
+- pusher la branche sur son github personnel 
+- proposer le fork, la nouvelle branche pour qu'il soit merger sur le projet principal 
+
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-6-correction-contribution-a-un-projet-opensource/
+# on peut s'y connecter en https ou en ssh 
+# pour se connecter en ssh il faut générer une clée ssh 
+ssh-keygen -t rsa 
+# copier le contenu le ma clé public (qui fini par ".pub") et je le copie sur mon compte github>profil>seting>ssh and key GPS key 
+
+# en faisant un connexion ssh, je n'aurai plus besoin d'entre mon user et mot de passe lors d'un push 
+maintenant, je peu cloner avec un lien git@.... et nom pas un lien ssh 
+
+# proposer sa contribution
+
+# mettre à jour ma master après une nouvelle contribution du projet principal 
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-6-correction-contribution-a-un-projet-opensource-2/
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-6-correction-comment-mettre-a-jour-son-repo-forke/
+git checkout master 
+git branch -D newbranch 
+git remote add mainstream https://github.com/.....repos_principal.git 
+git remote -v 
+# https://eazytraining.fr/cours/introduction-a-git/lessons/tp-6-correction-git-fetch/
+# récupérer les éventuels moification de mainstream vers mon master 
+git fetch mainstream master 
+# merger en local mon repos 
+git pull manistream master 
+# envoyer mon repos local mise à jours vers mon repos distant pour le mettre à jour également
+git push origin master 
+
+
+
+### git rebase 
+# créer ma branche 2
+git checkout autre_branche_2
+# récupérer les modifications de la branche autre_branche_1 vers ma branche autre_branche_2
+git rebase autre_branche_1
+
+# merger sur la master 
+git checkout master 
+git merge autre_branche_2
+
+
+
+### cherry-pick
+## recupérer juste un commit particulier et non pas tous les commits 
+aller sur la branche qui a créé le comit puis recupere l'id du commit 
+git log
+# recuperer l'id du commit voulu. aller sur la branche master ou mon autre branche puis :
+git cherry-pick xxxxxxid_du_commit_voulu_xxx
+
+
+
+### git stash : WIP (Work In Progess)
+## mettre un travail en pause et y revenir après 
+git stash 
+# faire mes modification 
+git stash list 
+# appliquer un stache spécifique qu'on avait laisser en cours avant de venir faire des modification parallèles 
+git stash apply stash@{0} # pour appliquer
+git stash drop stash@{0} # ensuite pour supprimer 
+git stash pop stash@{0} # pour appliquer puis suppimer automatiquement la stash
+
+
+
+
+
+### git Squash 
+## rassembler plusieurs commits enn un seul commit pour faciliter la lisibilité 
+# https://eazytraining.fr/cours/introduction-a-git/lessons/git-squash-en-pratique/
+# on recupère les 2 deniers commits
+git rebase -i HEAD~2 
+# remplacer le cernier pick par squash dans le fichier interactive qui s'est ouvert 
+# sauvegarder et mettre le message de la combinaison des 2 
+
+
+
+
+
+### git reset 
+## retourner à une version précédente
+## déplace le master et le head vers la version du commite souhaité 
+#> sans modifier vos fichiers 
+git reset --soft HEAD~ # permet de retourner au précédent commit . HEAD~3 pour aller vers un commit spécifique
+# ou en suprimer l'index 
+git reset --mixed HEAD~ 
+# ou en suprimer l'index et modifier nos fichier du directory pour les retourner vers la version du commite précisé. 
+git reset --hard HEAD~ 
+
+## tp 
+# afficher les id de commit et les fichiers qu'ils ont modifiés leur sha
+git ls-files -s 
+git log 
+
+
+
+
+
+
+
