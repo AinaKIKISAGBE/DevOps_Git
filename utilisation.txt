@@ -307,6 +307,11 @@ git ls-files -s
 git log 
 
 
+# supprimer un commit de l'historique des commite
+# on fera un retour en arrière 
+git log
+git reset --hard 2afb7c0a293cbbeb0255844fce9515871b622c4b # mettre l'id du commit auquel on veut revenir
+git push -f origin main
 
 
 
