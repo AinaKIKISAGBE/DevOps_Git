@@ -31,6 +31,19 @@ git push -u origin main
 
 
 
+### gestion des fichier volumineux avec git-lfs 
+git lfs install
+git lfs track "*.zip"
+git add .gitattributes
+git add path/to/your/large/file.zip
+git commit -m "Add large file using Git LFS"
+git push origin main
+
+
+
+
+
+
 
 # installation de git sur linux 
 sudo yum install git -y 
