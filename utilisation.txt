@@ -32,6 +32,9 @@ git push -u origin main
 
 
 ### gestion des fichier volumineux avec git-lfs 
+# https://git-lfs.github.com/
+# sudo apt-get install git-lfs
+# initialisation 
 git lfs install
 git lfs track "*.zip"
 git add .gitattributes
