@@ -1,4 +1,21 @@
 
+
+…or create a new repository on the command line
+echo "# venv_scoring" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/AinaKIKISAGBE/venv_scoring.git
+git push -u origin main
+…or push an existing repository from the command line
+git remote add origin https://github.com/AinaKIKISAGBE/venv_scoring.git
+git branch -M main
+git push -u origin main
+
+
+
+
 # installation de git sur linux 
 sudo yum install git -y 
 
