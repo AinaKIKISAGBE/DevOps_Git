@@ -32,6 +32,12 @@ git push -u origin main
 
 
 ### gestion des fichier volumineux avec git-lfs 
+echo "# venv_scoring" >> README.md
+git init
+git add README.md
+git branch -M main
+
+
 # https://git-lfs.github.com/
 # sudo apt-get install git-lfs
 # initialisation 
@@ -40,7 +46,10 @@ git lfs track "*.zip"
 git add .gitattributes
 git add path/to/your/large/file.zip
 git commit -m "Add large file using Git LFS"
-git push origin main
+git branch -M main
+git remote remove origin
+git remote add origin https://[token_github]@github.com/AinaKIKISAGBE/large_files_git_lfs.git
+git push -u origin main
 
 
 
